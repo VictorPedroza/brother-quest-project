@@ -1,0 +1,11 @@
+RewriteEngine On
+
+# 1. Impede a listagem de pastas no servidor
+Options -Indexes
+
+# 2. Garante que o index.html (do iframe) seja o arquivo padrão
+DirectoryIndex index.html
+
+# o servidor remove o "index.html" e redireciona para a raiz limpa (/)
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,9}\ /index\.html\ HTTP/ [NC]
+RewriteRule ^index\.html$ / [R=301,L]
