@@ -1,0 +1,73 @@
+/* COMPONENTE: DASHBOARD */
+
+.dashboard-box {
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  padding: 40px;
+  border-radius: var(--radius);
+  max-width: 400px;
+  width: 100%;
+}
+
+.dashboard-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.dashboard-title {
+  font-size: 1.5rem;
+  font-weight: 900;
+  margin-bottom: 0;
+}
+
+.dashboard-avatar {
+  width: 64px;
+  height: 64px;
+  font-size: 24px;
+  margin: 0 auto 16px;
+}
+
+.dashboard-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 32px;
+}
+
+.dashboard-stat-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--bg-color);
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 14px;
+}
+
+.dashboard-stat-item span:first-child {
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.dashboard-stat-item span:last-child {
+  font-weight: 800;
+}
+
+/* Botão de logout */
+.btn-logout {
+  background-color: #dc2626;
+  color: white;
+  font-weight: 700;
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.btn-logout:hover {
+  background-color: #b91c1c;
+}
