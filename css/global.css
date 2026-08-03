@@ -1,0 +1,16 @@
+/* Base adjustments */
+html {
+  line-height: 1.15; /* Improve readability */
+  -webkit-text-size-adjust: 100%; /* Prevent font scaling in iOS */
+}
+body {
+  margin: 0; /* Remove default margin */
+}
+main {
+  display: block; /* Ensure consistent rendering in IE */
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
