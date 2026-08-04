@@ -1,0 +1,33 @@
+:root {
+  /* Colors - Base */
+  --bg: #fbfaf6;
+  --white: #ffffff;
+  --badge-bg: #cae9ff;
+  --accent-blue: #007fdc;
+  --card-border: #e7ecf2;
+  --card-shadow: 0 1px 2px rgba(16, 24, 40, 0.04);
+
+  /* Colors - Text */
+  --text-dark: #0a1121;
+  --text-gray: #6b7280;
+  --text-gray-light: #8a93a3;
+
+  /* Colors - Palette */
+  --blue: #3b82f6;
+  --blue-dark: #2563eb;
+  --green: #10b981;
+  --green-dark: #059669;
+  --purple: #8b5cf6;
+  --purple-dark: #7c3aed;
+  --orange: #f97316;
+  --orange-dark: #ea580c;
+  --flame: #f97316;
+
+  /* Layout */
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+
+  /* Typography */
+  --font-display: "Segoe UI", sans-serif;
+  --font-body: "Inter", "Segoe UI", sans-serif;
+}
