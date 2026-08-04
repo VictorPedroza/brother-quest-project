@@ -1,15 +1,124 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>BrotherQuest</title>
-    <link rel="stylesheet" href="./css/global.css">
-</head>
-<body>
-    <h1>
-        Brother Quest
-    </h1>
-</body>
-<script type="module" src="./js/app.js"></script>
+    <link rel="stylesheet" href="/css/main.css" />
+  </head>
+  <body>
+    <main class="page">
+      <!-- Top / Header Section -->
+      <div class="top">
+        <span class="badge">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M7 4H17V9C17 11.7614 14.7614 14 12 14C9.23858 14 7 11.7614 7 9V4Z"
+              stroke="currentColor"
+              stroke-width="1.6"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M7 5H4V6C4 8 5.5 9.7 7.3 10"
+              stroke="currentColor"
+              stroke-width="1.6"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M17 5H20V6C20 8 18.5 9.7 16.7 10"
+              stroke="currentColor"
+              stroke-width="1.6"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M12 14V17"
+              stroke="currentColor"
+              stroke-width="1.6"
+              stroke-linecap="round"
+            />
+            <path
+              d="M8.5 20H15.5"
+              stroke="currentColor"
+              stroke-width="1.6"
+              stroke-linecap="round"
+            />
+            <path
+              d="M9.5 17H14.5L15 20H9L9.5 17Z"
+              stroke="currentColor"
+              stroke-width="1.6"
+              stroke-linejoin="round"
+            />
+          </svg>
+          GAMIFICAÇÃO DIÁRIA
+        </span>
+
+        <h1 class="logo">Brother<span>Quest</span></h1>
+
+        <p class="subtitle">
+          Escolha seu perfil e comece a transformar suas rotinas diárias<br />em
+          conquistas épicas.
+        </p>
+
+        <div class="players-label">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M17 20V18.5C17 16.567 15.433 15 13.5 15H6.5C4.567 15 3 16.567 3 18.5V20"
+              stroke="currentColor"
+              stroke-width="1.6"
+              stroke-linecap="round"
+            />
+            <circle
+              cx="10"
+              cy="8"
+              r="3.5"
+              stroke="currentColor"
+              stroke-width="1.6"
+            />
+            <path
+              d="M15.5 15C17.433 15 19 16.343 19 18V19.5"
+              stroke="currentColor"
+              stroke-width="1.6"
+              stroke-linecap="round"
+            />
+            <path
+              d="M14 5.06C15.14 5.32 16 6.36 16 7.6C16 8.84 15.14 9.88 14 10.14"
+              stroke="currentColor"
+              stroke-width="1.6"
+              stroke-linecap="round"
+            />
+          </svg>
+          Quem está jogando hoje?
+        </div>
+      </div>
+
+      <!-- Container dinâmico dos perfis -->
+      <div class="cards" id="cardsContainer"></div>
+    </main>
+
+    <!-- Overlay de boas-vindas ao entrar -->
+    <div class="overlay" id="welcomeOverlay">
+      <div class="overlay-card">
+        <div class="overlay-avatar" id="overlayAvatar"></div>
+        <h2 id="overlayGreeting">Bem-vindo de volta!</h2>
+        <p id="overlaySub">Preparando sua missão diária...</p>
+        <div class="loader">
+          <div class="loader-bar"></div>
+        </div>
+        <button class="ghost-btn" id="overlayClose">Voltar</button>
+      </div>
+    </div>
+
+    <!-- Scripts -->
+    <script type="module" src="/js/app.js"></script>
+  </body>
 </html>
