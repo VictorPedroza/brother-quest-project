@@ -1,0 +1,91 @@
+.profile-password-panel {
+  width: min(100%, 350px);
+  margin: 32px auto 0;
+  text-align: left;
+}
+
+.profile-access-form {
+  display: grid;
+  gap: 10px;
+}
+
+.field-label {
+  color: #8d82d8;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.password-field {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 14px;
+  border: 1px solid #dfe3eb;
+  border-radius: 12px;
+  background: var(--white);
+  box-shadow: 0 3px 10px rgba(16, 24, 40, 0.04);
+}
+
+.password-field > svg,
+.password-toggle svg {
+  width: 18px;
+  height: 18px;
+}
+
+.password-field > svg {
+  flex-shrink: 0;
+  color: #94a3b8;
+}
+
+.password-input {
+  min-width: 0;
+  flex: 1;
+  border: 0;
+  outline: 0;
+  padding: 14px 0;
+  background: transparent;
+  color: var(--text-dark);
+  font: inherit;
+  font-size: 14px;
+}
+
+.password-input::placeholder {
+  color: #94a3b8;
+}
+
+.password-field:focus-within {
+  border-color: var(--blu);
+  box-shadow: 0 0 0 3px rgba(139, 124, 255, 0.12);
+}
+
+.password-toggle,
+.change-profile-btn {
+  border: 0;
+  background: transparent;
+  color: #94a3b8;
+}
+
+.password-toggle {
+  display: grid;
+  place-items: center;
+  padding: 4px;
+}
+
+.profile-submit-btn {
+  width: 100%;
+  background: linear-gradient(90deg, #3b82f6, #2563eb);
+  padding: 13px 20px;
+}
+
+.change-profile-btn {
+  display: block;
+  margin: 13px auto 0;
+  font-size: 12px;
+}
+
+.change-profile-btn:hover,
+.password-toggle:hover {
+  color: #2563eb;
+}
