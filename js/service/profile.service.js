@@ -31,6 +31,7 @@ export class ProfileService {
       return (data || []).map(profile => ({
         id: profile.id,
         name: profile.name,
+        email: profile.email,
         level: Math.floor((profile.xp || 0) / 100) + 1,
         streak: profile.streak_count || 0,
         xp: profile.xp || 0,
