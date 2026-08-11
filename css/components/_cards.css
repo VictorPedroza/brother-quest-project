@@ -11,6 +11,8 @@
 }
 
 .card {
+  position: relative;
+  cursor: pointer;
   background: var(--white);
   border: 1px solid var(--card-border);
   border-radius: var(--radius-xl);
@@ -44,6 +46,28 @@
 .card:hover {
   transform: translateY(-4px);
   box-shadow: 0 12px 28px rgba(16, 24, 40, 0.09);
+}
+
+.card.selected {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 1px #2563eb, 0 12px 28px rgba(139, 124, 255, 0.14);
+  transform: translateY(-4px);
+}
+
+.card.selected::after {
+  content: "✓";
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: grid;
+  width: 22px;
+  height: 22px;
+  place-items: center;
+  border-radius: 50%;
+  background: #8b7cff;
+  color: var(--white);
+  font-size: 14px;
+  font-weight: 800;
 }
 
 .name {
@@ -140,9 +164,6 @@
 .card[data-color="green"] .blob {
   background: linear-gradient(160deg, #34d399, var(--green));
 }
-.card[data-color="purple"] .blob {
-  background: linear-gradient(160deg, #a78bfa, var(--purple));
-}
 .card[data-color="orange"] .blob {
   background: linear-gradient(160deg, #fb923c, var(--orange));
 }
@@ -152,9 +173,6 @@
 }
 .card[data-color="green"] .enter-btn {
   background: linear-gradient(180deg, #34d399, var(--green-dark));
-}
-.card[data-color="purple"] .enter-btn {
-  background: linear-gradient(180deg, #a78bfa, var(--purple-dark));
 }
 .card[data-color="orange"] .enter-btn {
   background: linear-gradient(180deg, #fb923c, var(--orange-dark));
