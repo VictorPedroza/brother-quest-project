@@ -23,6 +23,54 @@ const ICONS = {
 export class ProfileUI {
   constructor(containerId = "cardsContainer") {
     this.container = document.getElementById(containerId);
+    this.passwordPanel = document.getElementById("profilePasswordPanel");
+    this.passwordForm = document.getElementById("profileAccessForm");
+    this.passwordInput = document.getElementById("profilePassword");
+    this.passwordLabel = document.getElementById("passwordLabel");
+    this.submitButton = document.getElementById("profileSubmit");
+    this.selectedProfile = null;
+    this.onSelectProfile = null;
+    this.bindPasswordPanel();
+  }
+
+  bindPasswordPanel() {
+    if (!this.passwordForm) return;
+
+    this.passwordForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+      if (!this.passwordInput.checkValidity()) {
+        this.passwordInput.reportValidity();
+        return;
+      }
+      this.onSelectProfile?.(this.selectedProfile, this.passwordInput.value);
+    });
+
+    document.getElementById("passwordToggle")?.addEventListener("click", () => {
+      const isHidden = this.passwordInput.type === "password";
+      this.passwordInput.type = isHidden ? "text" : "password";
+      document.getElementById("passwordToggle").setAttribute("aria-label", isHidden ? "Ocultar senha" : "Mostrar senha");
+    });
+
+    document.getElementById("changeProfile")?.addEventListener("click", () => this.clearSelectedProfile());
+  }
+
+  selectProfile(profile, card) {
+    this.container.querySelectorAll(".card").forEach((item) => item.classList.remove("selected"));
+    card.classList.add("selected");
+    this.selectedProfile = profile;
+    this.passwordPanel.hidden = false;
+    this.passwordLabel.textContent = `Senha de ${profile.name}`;
+    this.submitButton.textContent = `Entrar como ${profile.name} →`;
+    this.passwordInput.value = "";
+    this.passwordInput.type = "password";
+    this.passwordInput.focus();
+  }
+
+  clearSelectedProfile() {
+    this.container.querySelectorAll(".card").forEach((item) => item.classList.remove("selected"));
+    this.selectedProfile = null;
+    this.passwordPanel.hidden = true;
+    this.passwordForm?.reset();
   }
 
   /**
@@ -70,14 +118,10 @@ export class ProfileUI {
         ${ICONS.flame}
         <span>${streak} dias</span>
       </div>
-      <button class="enter-btn">
-        JOGAR ${ICONS.arrow}
-      </button>
+      <button class="enter-btn" type="button">ENTRAR ${ICONS.arrow}</button>
     `;
 
-    if (typeof onSelect === "function") {
-      card.addEventListener("click", () => onSelect(profile));
-    }
+    card.addEventListener("click", () => this.selectProfile(profile, card));
 
     return card;
   }
@@ -116,6 +160,8 @@ export class ProfileUI {
   renderProfiles(profiles = [], { onSelectProfile } = {}) {
     if (!this.container) return;
     this.container.innerHTML = "";
+    this.onSelectProfile = onSelectProfile;
+    this.clearSelectedProfile();
 
     if (profiles.length === 0) {
       this.container.innerHTML = `
