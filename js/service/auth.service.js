@@ -31,4 +31,17 @@ export class AuthService {
 
     return data;
   }
+
+  /**
+   * Encerra a sessão do usuário atual.
+   *
+   * @returns {Promise<void>}
+   */
+  static async logout() {
+    const { error } = await supabase.auth.signOut();
+
+    if (error) {
+      throw error;
+    }
+  }
 }
