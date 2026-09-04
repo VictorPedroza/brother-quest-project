@@ -17,8 +17,34 @@ const metricValues = document.querySelectorAll(".metric__value");
 let activities = [];
 let completedActivityIds = new Set();
 
-function getActivityKey(activity) {
-  return activity.frequency === "weekly" ? "weekly" : "daily";
+function getFrequencyLabel(activity) {
+  return activity.frequency === "weekly" ? "Semanal" : "Diária";
+}
+
+function renderActivityGroup(title, groupActivities) {
+  if (!groupActivities.length) return "";
+
+  return `
+    <section class="activity-group" aria-labelledby="${title.toLowerCase()}-activities-title">
+      <h3 class="activity-group__title" id="${title.toLowerCase()}-activities-title">${title}</h3>
+      <div class="activity-group__list">
+        ${groupActivities
+          .map((activity) => {
+            const completed = completedActivityIds.has(activity.id);
+            return `
+              <article class="activity-item${completed ? " activity-item--completed" : ""}">
+                <div class="activity-item__content">
+                  <h4>${activity.title}</h4>
+                  <p>${getFrequencyLabel(activity)} · ${activity.xp_reward} XP · ${activity.coins_reward} moedas</p>
+                </div>
+                <button class="activity-button" type="button" data-activity-id="${activity.id}" ${completed ? "disabled" : ""}>
+                  ${completed ? "Concluída" : "Concluir"}
+                </button>
+              </article>`;
+          })
+          .join("")}
+      </div>
+    </section>`;
 }
 
 function renderActivities() {
@@ -35,21 +61,13 @@ function renderActivities() {
     return;
   }
 
-  activitiesList.innerHTML = activities
-    .map((activity) => {
-      const completed = completedActivityIds.has(activity.id);
-      return `
-        <article class="activity-item${completed ? " activity-item--completed" : ""}">
-          <div class="activity-item__content">
-            <h3>${activity.title}</h3>
-            <p>${getActivityKey(activity)} · ${activity.xp_reward} XP · ${activity.coins_reward} moedas</p>
-          </div>
-          <button class="activity-button" type="button" data-activity-id="${activity.id}" ${completed ? "disabled" : ""}>
-            ${completed ? "Concluída" : "Concluir"}
-          </button>
-        </article>`;
-    })
-    .join("");
+  const dailyActivities = activities.filter((activity) => activity.frequency === "daily");
+  const weeklyActivities = activities.filter((activity) => activity.frequency === "weekly");
+
+  activitiesList.innerHTML = [
+    renderActivityGroup("Atividades diárias", dailyActivities),
+    renderActivityGroup("Atividades semanais", weeklyActivities),
+  ].join("");
 }
 
 function updateProfile(profile) {
