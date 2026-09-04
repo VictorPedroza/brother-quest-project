@@ -13,6 +13,17 @@ import { supabase } from '../supabase/supabaseClient.js';
  * 
  */
 export class ProfileService {
+  static async getCurrentProfile(userId) {
+    const { data, error } = await supabase
+      .from('profiles')
+      .select('name, xp, streak_count')
+      .eq('id', userId)
+      .single();
+
+    if (error) throw error;
+    return data;
+  }
+
   /**
    * Busca os perfis do tipo 'player' chamando a RPC pública (não exige login).
    * @returns {Promise<Array<Object>>} Lista de perfis formatados para a UI

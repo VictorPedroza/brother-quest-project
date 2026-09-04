@@ -32,6 +32,15 @@ export class AuthService {
     return data;
   }
 
+  static async getCurrentUser() {
+    const { data, error } = await supabase.auth.getUser();
+
+    if (error) throw error;
+    if (!data.user) throw new Error("Sessão expirada");
+
+    return data.user;
+  }
+
   /**
    * Encerra a sessão do usuário atual.
    *
