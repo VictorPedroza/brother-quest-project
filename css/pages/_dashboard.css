@@ -163,6 +163,55 @@
 .metric__label { color: #61748a; font-size: 10px; font-weight: 700; letter-spacing: 0.07em; white-space: nowrap; }
 .metric__value { margin-top: 3px; font-size: 17px; font-weight: 800; white-space: nowrap; }
 
+.activities-section { margin-top: 21px; padding-bottom: 28px; }
+
+.activities-section__header {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.activities-section__title { margin-top: 3px; font-size: 20px; font-weight: 800; }
+
+.activities-count {
+  color: var(--accent-blue);
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.activities-list { display: grid; gap: 10px; }
+
+.activity-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 15px 17px;
+  border: 1px solid #d5e1ee;
+  border-radius: 14px;
+  background: var(--white);
+}
+
+.activity-item__content { min-width: 0; }
+.activity-item h3 { font-size: 14px; }
+.activity-item p { margin-top: 5px; color: #718096; font-size: 11px; text-transform: capitalize; }
+.activity-item--completed { opacity: 0.7; }
+
+.activity-button {
+  flex: 0 0 auto;
+  padding: 8px 12px;
+  border: 0;
+  border-radius: 8px;
+  background: var(--accent-blue);
+  color: white;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.activity-button:disabled { background: #a7b5c4; cursor: default; }
+.activities-message { padding: 18px 0; color: #718096; font-size: 13px; }
+
 @media (max-width: 600px) {
   .dashboard-nav__content, .dashboard { width: min(100% - 32px, 664px); }
   .metrics { grid-template-columns: 1fr; }
