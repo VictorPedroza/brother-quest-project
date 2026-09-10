@@ -9,8 +9,18 @@ let completedActivityIds = new Set();
 let profile = null;
 
 async function loadDashboard() {
+  let user;
+
   try {
-    const user = await AuthService.getCurrentUser();
+    user = await AuthService.getCurrentUser();
+    document.body.classList.remove("dashboard-page--auth-checking");
+  } catch (error) {
+    console.warn("Acesso ao dashboard bloqueado: sessão não autenticada.", error);
+    window.location.replace("/index.html");
+    return;
+  }
+
+  try {
     const [loadedProfile, loadedActivities, completions] = await Promise.all([
       ProfileService.getCurrentProfile(user.id),
       ActivityService.getActivities(),

@@ -1,3 +1,5 @@
+.dashboard-page--auth-checking > * { visibility: hidden; }
+
 .dashboard-nav {
   height: 54px;
   border-bottom: 1px solid #d9e1ea;
