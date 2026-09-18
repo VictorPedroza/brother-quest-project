@@ -41,6 +41,34 @@ export class AuthService {
     return data.user;
   }
 
+  static isAdmin(user) {
+    return user?.app_metadata?.role === "admin" || user?.user_metadata?.role === "admin";
+  }
+
+  static async getCurrentAdmin() {
+    const user = await this.getCurrentUser();
+
+    if (this.isAdmin(user)) {
+      return user;
+    }
+
+    const { data: profile, error } = await supabase
+      .from("profiles")
+      .select("role")
+      .eq("id", user.id)
+      .single();
+
+    if (error) {
+      throw error;
+    }
+
+    if (profile?.role !== "admin") {
+      throw new Error("Acesso restrito a administradores.");
+    }
+
+    return user;
+  }
+
   /**
    * Encerra a sessão do usuário atual.
    *

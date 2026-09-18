@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login administrativo | BrotherQuest</title>
+    <link rel="stylesheet" href="/css/main.css" />
+  </head>
+  <body class="admin-page admin-login-page">
+    <main class="admin-login-shell">
+      <a class="admin-back-link" href="/index.html">← Voltar ao BrotherQuest</a>
+      <section class="admin-login-card" aria-labelledby="admin-login-title">
+        <div class="admin-symbol" aria-hidden="true">BQ</div>
+        <p class="admin-eyebrow">ÁREA RESTRITA</p>
+        <h1 id="admin-login-title">Login do administrador</h1>
+        <p class="admin-login-intro">Entre para acompanhar a evolução da sua equipe.</p>
+
+        <form class="admin-form" id="adminLoginForm">
+          <label for="adminEmail">E-mail</label>
+          <input id="adminEmail" name="email" type="text" autocomplete="username" placeholder="admin@exemplo.com" required />
+          <label for="adminPassword">Senha</label>
+          <input id="adminPassword" name="password" type="password" autocomplete="current-password" placeholder="Digite sua senha" required />
+          <p class="admin-form-message" id="adminLoginMessage" role="alert" aria-live="polite"></p>
+          <button class="admin-primary-button" type="submit" id="adminLoginButton">Entrar no painel</button>
+        </form>
+      </section>
+    </main>
+    <script type="module" src="/js/admin-login.js"></script>
+  </body>
+</html>

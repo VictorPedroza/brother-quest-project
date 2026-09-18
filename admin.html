@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Painel administrativo | BrotherQuest</title>
+    <link rel="stylesheet" href="/css/main.css" />
+  </head>
+  <body class="admin-page">
+    <header class="admin-header">
+      <a class="brand" href="/admin.html" aria-label="BrotherQuest, painel administrativo">
+        <span class="brand__mark" aria-hidden="true">BQ</span>
+        <span>Brother<span>Quest</span></span>
+      </a>
+      <div class="admin-header__actions">
+        <a class="admin-dashboard-link" href="/dashboard.html">Dashboard do jogador</a>
+        <span class="admin-session-label" id="adminSessionEmail">Sessão administrativa</span>
+        <button class="admin-logout-button" type="button" id="adminLogoutButton">Sair</button>
+      </div>
+    </header>
+
+    <main class="admin-dashboard">
+      <section class="admin-welcome">
+        <div>
+          <p class="admin-eyebrow">PAINEL DE CONTROLE</p>
+          <h1>Visão geral da equipe</h1>
+          <p>Acompanhe os jogadores e o ritmo das missões.</p>
+        </div>
+        <span class="admin-status"><span></span> Sessão protegida</span>
+      </section>
+
+      <section class="admin-stats" aria-label="Resumo da equipe">
+        <article class="admin-stat"><span>JOGADORES</span><strong id="playersCount">--</strong><small>perfis ativos</small></article>
+        <article class="admin-stat"><span>XP MÉDIO</span><strong id="averageXp">--</strong><small>por jogador</small></article>
+        <article class="admin-stat"><span>MAIOR NÍVEL</span><strong id="highestLevel">--</strong><small>nível alcançado</small></article>
+      </section>
+
+      <section class="admin-panel" aria-labelledby="playersTitle">
+        <div class="admin-panel__heading">
+          <div>
+            <p class="admin-eyebrow">ACOMPANHAMENTO</p>
+            <h2 id="playersTitle">Jogadores</h2>
+          </div>
+          <button class="admin-refresh-button" id="refreshPlayers" type="button">Atualizar</button>
+        </div>
+        <div class="admin-table-wrap">
+          <table class="admin-table">
+            <thead><tr><th>Jogador</th><th>Nível</th><th>XP total</th><th>Sequência</th><th>Moedas</th></tr></thead>
+            <tbody id="playersTableBody"><tr><td colspan="5">Carregando jogadores...</td></tr></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+    <script type="module" src="/js/admin.js"></script>
+  </body>
+</html>
