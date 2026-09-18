@@ -48,6 +48,16 @@
 
 .brand__mark svg { width: 20px; height: 20px; }
 
+.rewards-nav-link {
+  margin-left: auto;
+  margin-right: 20px;
+  color: var(--accent-blue);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.rewards-nav-link:hover { text-decoration: underline; }
+
 .user-menu { gap: 10px; }
 
 .user-menu__details {

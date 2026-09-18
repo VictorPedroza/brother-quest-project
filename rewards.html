@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BrotherQuest - Prêmios</title>
+    <link rel="stylesheet" href="/css/main.css" />
+  </head>
+  <body class="dashboard-page rewards-page rewards-page--auth-checking">
+    <header class="dashboard-nav">
+      <div class="dashboard-nav__content">
+        <a class="brand" href="/dashboard.html" aria-label="BrotherQuest, painel inicial">
+          <span class="brand__mark" aria-hidden="true"></span>
+          <span>Brother<span>Quest</span></span>
+        </a>
+        <a class="rewards-nav-link" href="/dashboard.html">Missões</a>
+        <div class="user-menu">
+          <div class="user-menu__details">
+            <span class="user-menu__name">Jogador</span>
+            <span class="user-menu__level">Nível 1</span>
+          </div>
+          <span class="user-menu__avatar" aria-label="Perfil do jogador">J</span>
+          <button class="logout-button" type="button" aria-label="Sair">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14 8l4 4-4 4M18 12H9M11 5H6a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" /></svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main class="dashboard">
+      <section class="rewards-hero" aria-labelledby="rewards-title">
+        <div>
+          <p class="eyebrow">LOJA DE RECOMPENSAS</p>
+          <h1 class="rewards-hero__title" id="rewards-title">Troque Gold por prêmios</h1>
+          <p class="rewards-hero__copy">Cada missão concluída deixa você mais perto de desbloquear algo especial.</p>
+        </div>
+        <div class="rewards-balance">
+          <p class="rewards-balance__label">SEU SALDO</p>
+          <p class="rewards-balance__value" id="rewardsBalance">0 Gold</p>
+        </div>
+      </section>
+
+      <p class="rewards-message" id="rewardsMessage" aria-live="polite"></p>
+      <section class="rewards-grid" id="rewardsGrid" aria-label="Prêmios disponíveis">
+        <p class="rewards-message">Carregando prêmios...</p>
+      </section>
+
+      <section class="redemptions-section" aria-labelledby="redemptions-title">
+        <div class="redemptions-section__header">
+          <p class="eyebrow">SEU HISTÓRICO</p>
+          <h2 class="redemptions-section__title" id="redemptions-title">Resgates recentes</h2>
+        </div>
+        <div class="redemptions-list" id="redemptionsList" aria-live="polite">
+          <p class="rewards-message">Carregando histórico...</p>
+        </div>
+      </section>
+    </main>
+
+    <script type="module" src="/js/rewards.js"></script>
+  </body>
+</html>
