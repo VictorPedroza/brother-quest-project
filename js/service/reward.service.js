@@ -22,6 +22,16 @@ export class RewardService {
     return data || [];
   }
 
+  static async getAllRedemptions() {
+    const { data, error } = await supabase
+      .from("redemptions")
+      .select("id, user_id, reward_id, status, created_at, profiles(name), rewards(title, price)")
+      .order("created_at", { ascending: false });
+
+    if (error) throw error;
+    return data || [];
+  }
+
   static async redeemReward(userId, rewardId) {
     const { data: reward, error: rewardError } = await supabase
       .from("rewards")

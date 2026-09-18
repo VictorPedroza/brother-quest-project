@@ -33,6 +33,7 @@
         <article class="admin-stat"><span>JOGADORES</span><strong id="playersCount">--</strong><small>perfis ativos</small></article>
         <article class="admin-stat"><span>XP MÉDIO</span><strong id="averageXp">--</strong><small>por jogador</small></article>
         <article class="admin-stat"><span>MAIOR NÍVEL</span><strong id="highestLevel">--</strong><small>nível alcançado</small></article>
+        <article class="admin-stat"><span>RESGATES</span><strong id="redemptionsCount">--</strong><small>pedidos registrados</small></article>
       </section>
 
       <section class="admin-panel" aria-labelledby="playersTitle">
@@ -47,6 +48,22 @@
           <table class="admin-table">
             <thead><tr><th>Jogador</th><th>Nível</th><th>XP total</th><th>Sequência</th><th>Moedas</th></tr></thead>
             <tbody id="playersTableBody"><tr><td colspan="5">Carregando jogadores...</td></tr></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="admin-panel" aria-labelledby="redemptionsTitle">
+        <div class="admin-panel__heading">
+          <div>
+            <p class="admin-eyebrow">HISTÓRICO</p>
+            <h2 id="redemptionsTitle">Resgates dos usuários</h2>
+          </div>
+          <button class="admin-refresh-button" id="refreshRedemptions" type="button">Atualizar</button>
+        </div>
+        <div class="admin-table-wrap">
+          <table class="admin-table">
+            <thead><tr><th>Usuário</th><th>Prêmio</th><th>Valor</th><th>Data</th><th>Status</th></tr></thead>
+            <tbody id="redemptionsTableBody"><tr><td colspan="5">Carregando resgates...</td></tr></tbody>
           </table>
         </div>
       </section>
