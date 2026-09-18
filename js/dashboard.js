@@ -55,7 +55,12 @@ async function completeActivity(activityId, button) {
   try {
     const result = await ActivityService.completeActivity(activityId);
     completedActivityIds.add(activityId);
-    profile = { ...profile, xp: result.xp_total, streak_count: result.streak_count };
+    profile = {
+      ...profile,
+      xp: result.xp_total ?? profile.xp,
+      streak_count: result.streak_count ?? profile.streak_count,
+      coins: result.coins_total ?? result.coins ?? profile.coins,
+    };
     ui.updateProfile(profile);
     ui.renderActivities(activities, completedActivityIds);
   } catch (error) {

@@ -20,8 +20,7 @@
 }
 
 .brand,
-.user-menu,
-.metric {
+.user-menu {
   display: flex;
   align-items: center;
 }
@@ -141,12 +140,19 @@
 
 .metrics {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 14px;
   margin-top: 21px;
 }
 
-.metric { min-width: 0; gap: 13px; padding: 15px; }
+.metric {
+  display: grid;
+  grid-template-columns: 43px minmax(0, 1fr);
+  align-items: center;
+  min-width: 0;
+  gap: 13px;
+  padding: 15px;
+}
 
 .metric__icon {
   display: grid;
@@ -160,6 +166,7 @@
 .metric__icon svg { width: 23px; height: 23px; }
 .metric__icon--flame { background: #ffddd2; color: #ff654a; }
 .metric__icon--sparkle { background: #fff0ca; color: #f4b000; }
+.metric__icon--coin { background: #fff1bf; color: #d18a00; }
 .metric__icon--check { background: #d6f1d7; color: #1eae4a; }
 .metric__content { min-width: 0; }
 .metric__label { color: #61748a; font-size: 10px; font-weight: 700; letter-spacing: 0.07em; white-space: nowrap; }
@@ -220,6 +227,10 @@
 
 @media (max-width: 600px) {
   .dashboard-nav__content, .dashboard { width: min(100% - 32px, 664px); }
+  .metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 500px) {
   .metrics { grid-template-columns: 1fr; }
 }
 

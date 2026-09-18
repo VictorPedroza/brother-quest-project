@@ -16,7 +16,7 @@ export class ProfileService {
   static async getCurrentProfile(userId) {
     const { data, error } = await supabase
       .from('profiles')
-      .select('name, xp, streak_count')
+      .select('name, xp, streak_count, coins')
       .eq('id', userId)
       .single();
 

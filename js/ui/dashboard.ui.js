@@ -10,7 +10,10 @@ export class DashboardUI {
     this.levelHint = document.querySelector(".level-card__hint");
     this.progressFill = document.querySelector(".progress__fill");
     this.progressBar = document.querySelector(".progress");
-    this.metricValues = document.querySelectorAll(".metric__value");
+    this.streakValue = document.querySelector(".streak-metric__value");
+    this.xpMetricValue = document.querySelector(".xp-metric__value");
+    this.coinValue = document.querySelector(".coin-metric__value");
+    this.completedMetricValue = document.querySelector(".completed-metric__value");
   }
 
   onLogout(handler) {
@@ -44,7 +47,9 @@ export class DashboardUI {
     ).length;
 
     this.activitiesCount.textContent = `${completedCount}/${activities.length}`;
-    this.metricValues[2].textContent = `${completedCount}/${activities.length}`;
+    if (this.completedMetricValue) {
+      this.completedMetricValue.textContent = `${completedCount}/${activities.length}`;
+    }
 
     if (!activities.length) {
       this.showActivityError("Nenhuma atividade cadastrada.");
@@ -56,7 +61,7 @@ export class DashboardUI {
     this.activitiesList.innerHTML = [
       this.renderActivityGroup("Atividades diárias", dailyActivities, completedActivityIds),
       this.renderActivityGroup("Atividades semanais", weeklyActivities, completedActivityIds),
-    ].join("");
+    ].join(""); 
   }
 
   renderActivityGroup(title, activities, completedActivityIds) {
@@ -79,7 +84,7 @@ export class DashboardUI {
       <article class="activity-item${completed ? " activity-item--completed" : ""}">
         <div class="activity-item__content">
           <h4>${activity.title}</h4>
-          <p>${frequency} · ${activity.xp_reward} XP · ${activity.coins_reward} moedas</p>
+          <p>${frequency} · ${activity.xp_reward} XP · ${activity.coins_reward}</p>
         </div>
         <button class="activity-button" type="button" data-activity-id="${activity.id}" ${completed ? "disabled" : ""}>
           ${completed ? "Concluída" : "Concluir"}
@@ -91,6 +96,7 @@ export class DashboardUI {
     const level = Math.floor(profile.xp / 100) + 1;
     const xpInLevel = profile.xp % 100;
     const remainingXp = 100 - xpInLevel;
+    const coins = Number(profile.coins ?? 0);
 
     this.profileName.textContent = profile.name;
     this.profileLevel.textContent = `Nível ${level}`;
@@ -99,7 +105,8 @@ export class DashboardUI {
     this.levelHint.innerHTML = `Faltam <strong>${remainingXp} <span>XP</span></strong> para o próximo nível!`;
     this.progressFill.style.width = `${xpInLevel}%`;
     this.progressBar.setAttribute("aria-valuenow", xpInLevel);
-    this.metricValues[0].textContent = `${profile.streak_count} dias`;
-    this.metricValues[1].textContent = `${profile.xp} XP`;
+    if (this.streakValue) this.streakValue.textContent = `${profile.streak_count} dias`;
+    if (this.xpMetricValue) this.xpMetricValue.textContent = `${profile.xp} XP`;
+    if (this.coinValue) this.coinValue.textContent = `${coins} Gold`;
   }
 }
