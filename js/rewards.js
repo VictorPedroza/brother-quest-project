@@ -40,8 +40,11 @@ async function redeemReward(rewardId, button) {
 
   ui.setRedeemLoading(button, true);
   try {
-    await RewardService.redeemReward(user.id, rewardId);
-    profile = { ...profile, coins: Number(profile.coins) - reward.price };
+    const redemptionResult = await RewardService.redeemReward(user.id, rewardId);
+    profile = {
+      ...profile,
+      coins: redemptionResult.result.coins_remaining,
+    };
     redemptions = await RewardService.getCurrentRedemptions(user.id);
     const updatedRewards = await RewardService.getRewards();
     rewards = updatedRewards;

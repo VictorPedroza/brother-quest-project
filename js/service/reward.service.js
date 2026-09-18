@@ -33,38 +33,23 @@ export class RewardService {
   }
 
   static async redeemReward(userId, rewardId) {
-    const { data: reward, error: rewardError } = await supabase
-      .from("rewards")
-      .select("id, title, price, stock")
-      .eq("id", rewardId)
-      .single();
+    const reward = (await this.getRewards()).find((item) => item.id === rewardId);
+    if (!reward) throw new Error("Recompensa não encontrada.");
 
-    if (rewardError) throw rewardError;
-    if (reward.stock < 1) throw new Error("Este prêmio esgotou.");
+    const { data, error } = await supabase.rpc("redeem_reward", {
+      p_reward_id: rewardId,
+    });
 
-    const { error: stockError } = await supabase
-      .from("rewards")
-      .update({ stock: reward.stock - 1, updated_at: new Date().toISOString() })
-      .eq("id", rewardId)
-      .eq("stock", reward.stock);
+    if (error) throw error;
 
-    if (stockError) throw stockError;
-
-    const { data, error } = await supabase
-      .from("redemptions")
-      .insert({ user_id: userId, reward_id: rewardId })
-      .select("id, reward_id, status, created_at")
-      .single();
-
-    if (error) {
-      await supabase
-        .from("rewards")
-        .update({ stock: reward.stock, updated_at: new Date().toISOString() })
-        .eq("id", rewardId)
-        .eq("stock", reward.stock - 1);
-      throw error;
-    }
-
-    return { redemption: data, reward };
+    return {
+      reward,
+      result: data,
+      redemption: {
+        id: data.redemption_id,
+        reward_id: rewardId,
+        status: "pending",
+      },
+    };
   }
 }
