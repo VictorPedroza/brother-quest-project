@@ -32,6 +32,15 @@ export class RewardService {
     return data || [];
   }
 
+  static async confirmRedemption(redemptionId) {
+    const { data, error } = await supabase.rpc("confirm_redemption", {
+      p_redemption_id: redemptionId,
+    });
+
+    if (error) throw error;
+    return data;
+  }
+
   static async redeemReward(userId, rewardId) {
     const reward = (await this.getRewards()).find((item) => item.id === rewardId);
     if (!reward) throw new Error("Recompensa não encontrada.");

@@ -71,6 +71,9 @@
 .redemption-status { display: inline-flex; padding: 5px 9px; border-radius: 999px; background: #e8f2ff; color: var(--blue-dark); font-size: 11px; font-weight: 800; }
 .redemption-status--approved { background: #e8f6ee; color: var(--green-dark); }
 .redemption-status--rejected { background: #fff0ed; color: var(--orange-dark); }
+.admin-confirm-button { padding: 7px 10px; border: 0; border-radius: 7px; background: var(--accent-blue); color: var(--white); font: inherit; font-size: 11px; font-weight: 800; cursor: pointer; }
+.admin-confirm-button:hover { background: var(--blue-dark); }
+.admin-confirm-button:disabled { cursor: wait; opacity: 0.65; }
 
 @media (max-width: 640px) {
   .admin-login-card { padding: 28px 22px; }

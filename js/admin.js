@@ -82,7 +82,7 @@ function renderRedemptions(redemptions) {
   redemptionsCount.textContent = redemptions.length;
 
   if (!redemptions.length) {
-    redemptionsTableBody.innerHTML = '<tr><td colspan="5">Nenhum resgate registrado.</td></tr>';
+    redemptionsTableBody.innerHTML = '<tr><td colspan="6">Nenhum resgate registrado.</td></tr>';
     return;
   }
 
@@ -98,19 +98,20 @@ function renderRedemptions(redemptions) {
         <td>${escapeHtml(reward?.price ?? "-")} Gold</td>
         <td>${escapeHtml(formatDate(redemption.created_at))}</td>
         <td><span class="redemption-status redemption-status--${escapeHtml(redemption.status || "pending")}">${escapeHtml(status)}</span></td>
+        <td>${redemption.status === "pending" ? `<button class="admin-confirm-button" type="button" data-redemption-id="${escapeHtml(redemption.id)}">Confirmar</button>` : "-"}</td>
       </tr>`;
   }).join("");
 }
 
 async function loadRedemptions() {
   refreshRedemptionsButton.disabled = true;
-  redemptionsTableBody.innerHTML = '<tr><td colspan="5">Atualizando resgates...</td></tr>';
+  redemptionsTableBody.innerHTML = '<tr><td colspan="6">Atualizando resgates...</td></tr>';
 
   try {
     renderRedemptions(await RewardService.getAllRedemptions());
   } catch (error) {
     console.error("Erro ao carregar resgates:", error);
-    redemptionsTableBody.innerHTML = '<tr><td colspan="5">Não foi possível carregar os resgates.</td></tr>';
+    redemptionsTableBody.innerHTML = '<tr><td colspan="6">Não foi possível carregar os resgates.</td></tr>';
   } finally {
     refreshRedemptionsButton.disabled = false;
   }
@@ -134,4 +135,21 @@ logoutButton?.addEventListener("click", async () => {
 });
 refreshButton?.addEventListener("click", loadPlayers);
 refreshRedemptionsButton?.addEventListener("click", loadRedemptions);
+redemptionsTableBody?.addEventListener("click", async (event) => {
+  const button = event.target.closest("[data-redemption-id]");
+  if (!button) return;
+
+  button.disabled = true;
+  button.textContent = "Confirmando...";
+
+  try {
+    await RewardService.confirmRedemption(button.dataset.redemptionId);
+    await loadRedemptions();
+  } catch (error) {
+    console.error("Erro ao confirmar resgate:", error);
+    button.disabled = false;
+    button.textContent = "Tentar novamente";
+    window.alert(error.message || "Não foi possível confirmar o resgate.");
+  }
+});
 init();
