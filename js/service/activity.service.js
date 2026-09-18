@@ -40,13 +40,33 @@ export class ActivityService {
     return data || [];
   }
 
-  // Função para completar atividade (Chama a Trigger no Banco de Dados)
-  static async completeActivity(activityId) {
+  // Envia a evidência antes de registrar a conclusão da atividade.
+  static async completeActivity(activityId, userId, photo) {
+    if (!photo?.type?.startsWith("image/")) {
+      throw new Error("Envie uma foto para concluir a atividade.");
+    }
+
+    const extension = photo.name.split(".").pop()?.toLowerCase() || "jpg";
+    const photoPath = `upload/${userId}/${activityId}-${Date.now()}.${extension}`;
+    const { error: uploadError } = await supabase.storage
+      .from("images")
+      .upload(photoPath, photo, {
+        cacheControl: "3600",
+        contentType: photo.type,
+        upsert: false,
+      });
+
+    if (uploadError) throw uploadError;
+
     const { data, error } = await supabase.rpc("complete_activity", {
       p_activity_id: activityId,
     });
 
-    if (error) throw error;
+    if (error) {
+      await supabase.storage.from("images").remove([photoPath]);
+      throw error;
+    }
+
     return data;
   }
 }

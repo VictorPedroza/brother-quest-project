@@ -7,12 +7,14 @@ const ui = new DashboardUI();
 let activities = [];
 let completedActivityIds = new Set();
 let profile = null;
+let currentUserId = null;
 
 async function loadDashboard() {
   let user;
 
   try {
     user = await AuthService.getCurrentUser();
+    currentUserId = user.id;
     document.body.classList.remove("dashboard-page--auth-checking");
   } catch (error) {
     console.warn("Acesso ao dashboard bloqueado: sessão não autenticada.", error);
@@ -49,11 +51,11 @@ async function loadDashboard() {
   }
 }
 
-async function completeActivity(activityId, button) {
+async function completeActivity(activityId, button, photo) {
   ui.setActivityLoading(button, true);
 
   try {
-    const result = await ActivityService.completeActivity(activityId);
+    const result = await ActivityService.completeActivity(activityId, currentUserId, photo);
     completedActivityIds.add(activityId);
     profile = {
       ...profile,

@@ -23,7 +23,19 @@ export class DashboardUI {
   onCompleteActivity(handler) {
     this.activitiesList?.addEventListener("click", (event) => {
       const button = event.target.closest("[data-activity-id]");
-      if (button) handler(button.dataset.activityId, button);
+      if (!button) return;
+
+      event.preventDefault();
+      button.parentElement.querySelector(".activity-photo-input")?.click();
+    });
+
+    this.activitiesList?.addEventListener("change", (event) => {
+      const input = event.target.closest(".activity-photo-input");
+      if (!input?.files?.[0]) return;
+
+      const button = input.parentElement.querySelector("[data-activity-id]");
+      handler(button.dataset.activityId, button, input.files[0]);
+      input.value = "";
     });
   }
 
@@ -86,9 +98,12 @@ export class DashboardUI {
           <h4>${activity.title}</h4>
           <p>${frequency} · ${activity.xp_reward} XP · ${activity.coins_reward}</p>
         </div>
-        <button class="activity-button" type="button" data-activity-id="${activity.id}" ${completed ? "disabled" : ""}>
-          ${completed ? "Concluída" : "Concluir"}
-        </button>
+        <div class="activity-action">
+          <input class="activity-photo-input" type="file" accept="image/*" capture="environment" aria-label="Enviar foto da conclusão de ${activity.title}" ${completed ? "disabled" : ""} />
+          <button class="activity-button" type="button" data-activity-id="${activity.id}" ${completed ? "disabled" : ""}>
+            ${completed ? "Concluída" : "Concluir"}
+          </button>
+        </div>
       </article>`;
   }
 
