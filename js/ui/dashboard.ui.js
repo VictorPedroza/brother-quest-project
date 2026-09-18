@@ -5,6 +5,7 @@ export class DashboardUI {
     this.activitiesCount = document.querySelector("#activitiesCount");
     this.profileName = document.querySelector(".user-menu__name");
     this.profileLevel = document.querySelector(".user-menu__level");
+    this.profileAvatar = document.querySelector(".user-menu__avatar");
     this.currentLevel = document.querySelector("#current-level");
     this.xpValue = document.querySelector(".level-card__xp-value");
     this.levelHint = document.querySelector(".level-card__hint");
@@ -112,9 +113,17 @@ export class DashboardUI {
     const xpInLevel = profile.xp % 100;
     const remainingXp = 100 - xpInLevel;
     const coins = Number(profile.coins ?? 0);
+    const nameParts = profile.name.trim().split(/\s+/).filter(Boolean);
+    const initials = nameParts.length > 1
+      ? `${nameParts[0][0]}${nameParts[nameParts.length - 1][0]}`
+      : nameParts[0]?.slice(0, 2) || "?";
 
     this.profileName.textContent = profile.name;
     this.profileLevel.textContent = `Nível ${level}`;
+    if (this.profileAvatar) {
+      this.profileAvatar.textContent = initials.toUpperCase();
+      this.profileAvatar.setAttribute("aria-label", `Perfil de ${profile.name}`);
+    }
     this.currentLevel.textContent = `Nível ${level}`;
     this.xpValue.innerHTML = `${xpInLevel} <span>/ 100 XP</span>`;
     this.levelHint.innerHTML = `Faltam <strong>${remainingXp} <span>XP</span></strong> para o próximo nível!`;
