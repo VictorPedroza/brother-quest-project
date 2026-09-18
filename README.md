@@ -107,31 +107,6 @@ A estrutura foi pensada para separar dados, regras e apresentação, mantendo o 
 
 ---
 
-## Como executar localmente
-
-Como o projeto é estático, a forma mais simples de rodar é com um servidor local.
-
-### Opção 1 - Python
-
-```bash
-cd C:/Users/victo/Projects/me/js/brother-quest-project
-python -m http.server 8000
-```
-
-Depois abra no navegador:
-
-```text
-http://localhost:8000/
-```
-
-### Opção 2 - Node.js
-
-```bash
-npx serve .
-```
-
----
-
 ## Configuração com Supabase
 
 Este projeto depende do Supabase para autenticação, perfis, atividades, resgates e permissões.
