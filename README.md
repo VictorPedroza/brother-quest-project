@@ -91,19 +91,55 @@ Esse painel ajuda a acompanhar a motivação e o desempenho coletivo sem expor a
 
 ## Estrutura do projeto
 
-O projeto é organizado em páginas e módulos com responsabilidades separadas:
+As páginas HTML ficam na raiz porque são pontos de entrada servidos diretamente pelo hosting estático. Cada página carrega a folha de estilos compartilhada e seu próprio módulo JavaScript.
 
-- `index.html`: tela inicial de seleção de perfis;
-- `dashboard.html`: painel principal do jogador;
-- `rewards.html`: loja de recompensas;
-- `admin-login.html` e `admin.html`: área administrativa;
-- `js/`: lógica da aplicação;
-- `js/service/`: serviços para autenticação, perfil, atividades e recompensas;
-- `js/ui/`: renderização e interações da interface;
-- `css/`: estilos do sistema;
-- `js/supabase/`: configuração do cliente Supabase.
+```text
+.
+├── index.html
+├── dashboard.html
+├── rewards.html
+├── admin-login.html
+├── admin.html
+├── css/
+│   ├── main.css
+│   ├── base/
+│   ├── components/
+│   ├── layout/
+│   ├── pages/
+│   └── utils/
+└── js/
+	├── app.js
+	├── dashboard.js
+	├── rewards.js
+	├── admin-login.js
+	├── admin.js
+	├── service/
+	├── supabase/
+	├── ui/
+	└── utils/
+```
 
-A estrutura foi pensada para separar dados, regras e apresentação, mantendo o código mais legível e fácil de evoluir.
+Responsabilidades principais:
+
+- `css/main.css`: ponto único de entrada dos estilos, importando os arquivos de cada categoria;
+- `css/base/`: reset e variáveis globais;
+- `css/components/`: estilos de componentes reutilizáveis;
+- `css/layout/`: estruturas compartilhadas entre páginas;
+- `css/pages/`: estilos específicos de cada página;
+- `css/utils/`: animações e utilitários visuais;
+- `js/`: módulos de entrada associados às páginas;
+- `js/service/`: acesso e operações de negócio para autenticação, perfis, atividades e recompensas;
+- `js/ui/`: atualização e renderização da interface;
+- `js/supabase/`: configuração e integração com o Supabase;
+- `js/utils/`: funções auxiliares reutilizáveis.
+
+### Convenções para novas páginas e módulos
+
+- Manter as páginas HTML na raiz e usar `lang="pt-BR"`, metadados de codificação e viewport, título e referências de assets dentro de `<head>`.
+- Compartilhar `/css/main.css`; adicionar estilos específicos em `css/pages/` e registrá-los em `css/main.css`.
+- Usar um módulo de entrada em `js/` por página e manter lógica reutilizável em `service/`, `ui/` ou `utils/` conforme a responsabilidade.
+- Usar `<script type="module">` para os módulos de página e caminhos absolutos iniciados em `/` para os assets, como nas páginas atuais.
+- Preservar os nomes e caminhos públicos das páginas para manter compatibilidade com os links e o hosting estático.
 
 ---
 
