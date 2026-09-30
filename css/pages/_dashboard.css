@@ -2,8 +2,8 @@
 
 .dashboard-nav {
   height: 54px;
-  border-bottom: 1px solid #d9e1ea;
-  background: #fffefa;
+  border-bottom: 1px solid var(--card-border);
+  background: rgba(255, 255, 255, 0.58);
 }
 
 .dashboard-nav__content,
@@ -30,7 +30,8 @@
   color: var(--text-dark);
   font-size: 18px;
   font-weight: 800;
-  letter-spacing: -0.04em;
+  font-family: var(--font-display);
+  letter-spacing: 0;
 }
 
 .brand span { color: var(--accent-blue); }
@@ -40,10 +41,10 @@
   place-items: center;
   width: 33px;
   height: 33px;
-  border-radius: 50%;
+  border-radius: 8px;
   color: white;
   background: #00a89d;
-  box-shadow: 0 2px 5px rgba(0, 124, 116, 0.28);
+  box-shadow: 3px 3px 0 rgba(0, 124, 116, 0.18);
 }
 
 .brand__mark svg { width: 20px; height: 20px; }
@@ -96,9 +97,9 @@
 
 .level-card,
 .metric {
-  border: 1px solid #d5e1ee;
-  background: var(--white);
-  border-radius: 17px;
+  border: 1px solid var(--card-border);
+  background: rgba(255, 255, 255, 0.72);
+  border-radius: 12px;
 }
 
 .level-card { padding: 22px; }
@@ -119,6 +120,7 @@
 .level-card__title {
   margin-top: 2px;
   color: var(--accent-blue);
+  font-family: var(--font-display);
   font-size: 21px;
   line-height: 1.15;
   font-weight: 800;
@@ -211,9 +213,9 @@
   justify-content: space-between;
   gap: 16px;
   padding: 15px 17px;
-  border: 1px solid #d5e1ee;
-  border-radius: 14px;
-  background: var(--white);
+  border: 1px solid var(--card-border);
+  border-radius: 9px;
+  background: rgba(255, 255, 255, 0.72);
 }
 
 .activity-item__content { min-width: 0; }

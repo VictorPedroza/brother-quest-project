@@ -10,7 +10,7 @@
 }
 
 .field-label {
-  color: #8d82d8;
+  color: var(--accent-blue);
   font-size: 10px;
   font-weight: 800;
   letter-spacing: 0.14em;
@@ -56,8 +56,8 @@
 }
 
 .password-field:focus-within {
-  border-color: var(--blu);
-  box-shadow: 0 0 0 3px rgba(139, 124, 255, 0.12);
+  border-color: var(--accent-blue);
+  box-shadow: 0 0 0 3px rgba(0, 127, 220, 0.12);
 }
 
 .password-toggle,

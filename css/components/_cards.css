@@ -1,7 +1,7 @@
 .cards {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 24px;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+  gap: 18px;
 }
 
 @media (max-width: 640px) {
@@ -13,11 +13,11 @@
 .card {
   position: relative;
   cursor: pointer;
-  background: var(--white);
+  background: rgba(255, 255, 255, 0.72);
   border: 1px solid var(--card-border);
   border-radius: var(--radius-xl);
   box-shadow: var(--card-shadow);
-  padding: 40px 28px 32px;
+  padding: 30px 26px 24px;
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -44,13 +44,13 @@
 }
 
 .card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 28px rgba(16, 24, 40, 0.09);
+  transform: translateY(-3px) rotate(-0.4deg);
+  box-shadow: 0 11px 0 rgba(38, 48, 44, 0.1);
 }
 
 .card.selected {
   border-color: #2563eb;
-  box-shadow: 0 0 0 1px #2563eb, 0 12px 28px rgba(139, 124, 255, 0.14);
+  box-shadow: 0 0 0 2px var(--accent-blue), 0 10px 0 rgba(38, 48, 44, 0.1);
   transform: translateY(-4px);
 }
 
@@ -63,8 +63,8 @@
   width: 22px;
   height: 22px;
   place-items: center;
-  border-radius: 50%;
-  background: #8b7cff;
+  border-radius: 6px;
+  background: var(--accent-blue);
   color: var(--white);
   font-size: 14px;
   font-weight: 800;
@@ -102,8 +102,8 @@
 /* Avatar & Blob */
 .avatar-wrap {
   position: relative;
-  width: 128px;
-  height: 128px;
+  width: 116px;
+  height: 116px;
   margin-bottom: 22px;
   display: flex;
   align-items: center;
@@ -113,7 +113,7 @@
 .blob {
   position: absolute;
   inset: 0;
-  border-radius: 50%;
+  border-radius: 42% 58% 51% 49% / 51% 44% 56% 49%;
   transition: transform 0.25s ease;
 }
 
@@ -159,30 +159,30 @@
 
 /* Color Variants */
 .card[data-color="blue"] .blob {
-  background: linear-gradient(160deg, #5b93f7, var(--blue));
+  background: var(--blue);
 }
 .card[data-color="green"] .blob {
-  background: linear-gradient(160deg, #34d399, var(--green));
+  background: var(--green);
 }
 .card[data-color="orange"] .blob {
-  background: linear-gradient(160deg, #fb923c, var(--orange));
+  background: var(--orange);
 }
 
 .card[data-color="blue"] .enter-btn {
-  background: linear-gradient(180deg, #5b93f7, var(--blue-dark));
+  background: var(--blue-dark);
 }
 .card[data-color="green"] .enter-btn {
-  background: linear-gradient(180deg, #34d399, var(--green-dark));
+  background: var(--green-dark);
 }
 .card[data-color="orange"] .enter-btn {
-  background: linear-gradient(180deg, #fb923c, var(--orange-dark));
+  background: var(--orange-dark);
 }
 
 /* Add Card */
 .add-card {
   border: 2px dashed var(--card-border);
   box-shadow: none;
-  background: #fcfcfa;
+  background: rgba(255, 255, 255, 0.35);
   cursor: pointer;
   justify-content: center;
   min-height: 100%;
@@ -196,7 +196,7 @@
 .add-icon {
   width: 56px;
   height: 56px;
-  border-radius: 50%;
+  border-radius: 12px;
   background: var(--badge-bg);
   color: var(--accent-blue);
   font-size: 28px;

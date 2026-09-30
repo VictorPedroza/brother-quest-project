@@ -17,8 +17,8 @@
   flex: 0 0 auto;
   padding: 12px 16px;
   border: 1px solid #ead7a0;
-  border-radius: 13px;
-  background: #fff6d9;
+  border-radius: 8px;
+  background: #f7dfbd;
   text-align: right;
 }
 
@@ -32,10 +32,10 @@
   grid-template-columns: 46px minmax(0, 1fr);
   gap: 14px;
   padding: 17px;
-  border: 1px solid #d5e1ee;
-  border-radius: 15px;
-  background: var(--white);
-  box-shadow: 0 3px 12px rgba(26, 55, 85, 0.04);
+  border: 1px solid var(--card-border);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.72);
+  box-shadow: 4px 4px 0 rgba(38, 48, 44, 0.06);
 }
 
 .reward-card__icon {
@@ -59,7 +59,7 @@
   width: 100%;
   padding: 10px 12px;
   border: 0;
-  border-radius: 9px;
+  border-radius: 7px;
   background: var(--accent-blue);
   color: white;
   font-size: 12px;

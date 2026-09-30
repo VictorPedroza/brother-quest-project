@@ -40,7 +40,7 @@
 .admin-form-message { min-height: 20px; color: #b42318; font-size: 13px; }
 .admin-form-message.is-success { color: #087443; }
 
-.admin-header { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 18px max(24px, calc((100vw - 1120px) / 2)); background: var(--white); border-bottom: 1px solid #e3eaf2; }
+.admin-header { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 18px max(24px, calc((100vw - 1120px) / 2)); background: rgba(255, 255, 255, 0.62); border-bottom: 1px solid var(--card-border); }
 .admin-header .brand { display: flex; align-items: center; gap: 10px; color: var(--text-dark); font-size: 18px; font-weight: 800; }
 .admin-header .brand > span:last-child > span { color: var(--accent-blue); }
 .brand__mark { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 8px; background: var(--accent-blue); color: var(--white); font-size: 10px; }
@@ -53,7 +53,7 @@
 .admin-status { display: inline-flex; align-items: center; gap: 7px; padding: 9px 12px; border-radius: 999px; background: #e8f2ff; color: var(--blue-dark); font-size: 12px; font-weight: 800; }
 .admin-status span { width: 7px; height: 7px; border-radius: 50%; background: var(--accent-blue); }
 .admin-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin: 34px 0; }
-.admin-stat, .admin-panel { background: var(--white); border: 1px solid #e3eaf2; border-radius: 16px; }
+.admin-stat, .admin-panel { background: rgba(255, 255, 255, 0.72); border: 1px solid var(--card-border); border-radius: 10px; }
 .admin-stat { padding: 22px; }
 .admin-stat span { display: block; color: #829ab1; font-size: 11px; font-weight: 800; letter-spacing: 0.1em; }
 .admin-stat strong { display: block; margin: 10px 0 4px; color: var(--text-dark); font-size: 28px; }

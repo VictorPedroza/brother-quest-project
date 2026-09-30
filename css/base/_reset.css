@@ -17,6 +17,8 @@ body {
   font-family: var(--font-body);
   color: var(--text-dark);
   -webkit-font-smoothing: antialiased;
+  background-image: radial-gradient(rgba(38, 48, 44, 0.07) 0.7px, transparent 0.7px);
+  background-size: 7px 7px;
 }
 
 a {
