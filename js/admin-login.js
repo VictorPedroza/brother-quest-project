@@ -7,16 +7,30 @@ const message = document.querySelector("#adminLoginMessage");
 const button = document.querySelector("#adminLoginButton");
 const ADMIN_DASHBOARD_URL = "/admin.html";
 
+/**
+ * Atualiza a mensagem de estado do formulário administrativo.
+ * @param {string} text - Texto a ser exibido.
+ * @param {boolean} [isError=true] - Indica se a mensagem representa erro.
+ * @returns {void}
+ */
 function setMessage(text, isError = true) {
   message.textContent = text;
   message.classList.toggle("is-error", isError && Boolean(text));
   message.classList.toggle("is-success", !isError && Boolean(text));
 }
 
+/**
+ * Redireciona para o painel administrativo.
+ * @returns {void}
+ */
 function redirectToAdminDashboard() {
   window.location.replace(ADMIN_DASHBOARD_URL);
 }
 
+/**
+ * Redireciona para o painel quando já existe uma sessão administrativa.
+ * @returns {Promise<void>}
+ */
 async function redirectIfAdmin() {
   try {
     await AuthService.getCurrentAdmin();

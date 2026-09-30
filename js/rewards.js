@@ -9,6 +9,10 @@ let profile;
 let rewards = [];
 let redemptions = [];
 
+/**
+ * Carrega a sessão, o saldo, os prêmios e os resgates.
+ * @returns {Promise<void>}
+ */
 async function loadRewardsPage() {
   try {
     user = await AuthService.getCurrentUser();
@@ -34,6 +38,12 @@ async function loadRewardsPage() {
   }
 }
 
+/**
+ * Resgata um prêmio e atualiza o saldo e o histórico.
+ * @param {string} rewardId - Identificador do prêmio.
+ * @param {HTMLButtonElement} button - Botão associado ao prêmio.
+ * @returns {Promise<void>}
+ */
 async function redeemReward(rewardId, button) {
   const reward = rewards.find((item) => item.id === rewardId);
   if (!reward) return;
@@ -59,6 +69,10 @@ async function redeemReward(rewardId, button) {
   }
 }
 
+/**
+ * Encerra a sessão e retorna à tela inicial.
+ * @returns {Promise<void>}
+ */
 async function logout() {
   ui.setLogoutLoading(true);
   try {

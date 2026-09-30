@@ -1,4 +1,6 @@
+/** Renderização e interação da página de progresso do jogador. */
 export class DashboardUI {
+  /** Inicializa as referências aos elementos do dashboard. */
   constructor() {
     this.logoutButton = document.querySelector(".logout-button");
     this.activitiesList = document.querySelector("#activitiesList");
@@ -17,10 +19,20 @@ export class DashboardUI {
     this.completedMetricValue = document.querySelector(".completed-metric__value");
   }
 
+  /**
+   * Registra o callback do botão de logout.
+   * @param {Function} handler - Callback executado ao sair.
+   * @returns {void}
+   */
   onLogout(handler) {
     this.logoutButton?.addEventListener("click", handler);
   }
 
+  /**
+   * Registra os eventos usados para selecionar e enviar evidências.
+   * @param {Function} handler - Callback com ID, botão e arquivo da atividade.
+   * @returns {void}
+   */
   onCompleteActivity(handler) {
     this.activitiesList?.addEventListener("click", (event) => {
       const button = event.target.closest("[data-activity-id]");
@@ -40,20 +52,42 @@ export class DashboardUI {
     });
   }
 
+  /**
+   * Atualiza o estado do botão de logout.
+   * @param {boolean} isLoading - Indica se o logout está em andamento.
+   * @returns {void}
+   */
   setLogoutLoading(isLoading) {
     if (this.logoutButton) this.logoutButton.disabled = isLoading;
   }
 
+  /**
+   * Atualiza o estado do botão de uma atividade.
+   * @param {HTMLButtonElement} button - Botão da atividade.
+   * @param {boolean} isLoading - Indica se a operação está em andamento.
+   * @returns {void}
+   */
   setActivityLoading(button, isLoading) {
     if (button) button.disabled = isLoading;
   }
 
+  /**
+   * Exibe uma mensagem na lista de atividades.
+   * @param {string} message - Mensagem a exibir.
+   * @returns {void}
+   */
   showActivityError(message) {
     if (this.activitiesList) {
       this.activitiesList.innerHTML = `<p class="activities-message">${message}</p>`;
     }
   }
 
+  /**
+   * Renderiza as atividades e atualiza os totais de conclusão.
+   * @param {Array<Object>} activities - Atividades disponíveis.
+   * @param {Set<string>} completedActivityIds - IDs das atividades concluídas.
+   * @returns {void}
+   */
   renderActivities(activities, completedActivityIds) {
     const completedCount = activities.filter((activity) =>
       completedActivityIds.has(activity.id),
@@ -77,6 +111,13 @@ export class DashboardUI {
     ].join(""); 
   }
 
+  /**
+   * Renderiza um grupo de atividades.
+   * @param {string} title - Título do grupo.
+   * @param {Array<Object>} activities - Atividades do grupo.
+   * @param {Set<string>} completedActivityIds - IDs das atividades concluídas.
+   * @returns {string} Marcação HTML do grupo ou uma string vazia.
+   */
   renderActivityGroup(title, activities, completedActivityIds) {
     if (!activities.length) return "";
 
@@ -89,6 +130,12 @@ export class DashboardUI {
       </section>`;
   }
 
+  /**
+   * Renderiza um item de atividade.
+   * @param {Object} activity - Dados da atividade.
+   * @param {Set<string>} completedActivityIds - IDs das atividades concluídas.
+   * @returns {string} Marcação HTML da atividade.
+   */
   renderActivity(activity, completedActivityIds) {
     const completed = completedActivityIds.has(activity.id);
     const frequency = activity.frequency === "weekly" ? "Semanal" : "Diária";
@@ -108,6 +155,11 @@ export class DashboardUI {
       </article>`;
   }
 
+  /**
+   * Atualiza o perfil, os indicadores de progresso e o saldo na interface.
+   * @param {Object} profile - Dados atuais do perfil.
+   * @returns {void}
+   */
   updateProfile(profile) {
     const level = Math.floor(profile.xp / 100) + 1;
     const xpInLevel = profile.xp % 100;

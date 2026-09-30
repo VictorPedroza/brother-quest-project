@@ -1,3 +1,8 @@
+/**
+ * Escapa texto para inserção segura em conteúdo HTML.
+ * @param {*} value - Valor a ser escapado.
+ * @returns {string} Texto escapado.
+ */
 function escapeHtml(value) {
   return String(value)
     .replaceAll("&", "&amp;")
@@ -7,6 +12,11 @@ function escapeHtml(value) {
     .replaceAll("'", "&#039;");
 }
 
+/**
+ * Formata uma data para exibição resumida em pt-BR.
+ * @param {string|Date} value - Data a formatar.
+ * @returns {string} Data formatada.
+ */
 function formatDate(value) {
   return new Intl.DateTimeFormat("pt-BR", {
     day: "2-digit",
@@ -14,7 +24,9 @@ function formatDate(value) {
   }).format(new Date(value));
 }
 
+/** Renderização e interação da loja de recompensas. */
 export class RewardsUI {
+  /** Inicializa as referências aos elementos da loja de recompensas. */
   constructor() {
     this.rewardsGrid = document.querySelector("#rewardsGrid");
     this.redemptionsList = document.querySelector("#redemptionsList");
@@ -23,10 +35,20 @@ export class RewardsUI {
     this.logoutButton = document.querySelector(".logout-button");
   }
 
+  /**
+   * Registra o callback do botão de logout.
+   * @param {Function} handler - Callback executado ao sair.
+   * @returns {void}
+   */
   onLogout(handler) {
     this.logoutButton?.addEventListener("click", handler);
   }
 
+  /**
+   * Registra o callback de resgate na grade de prêmios.
+   * @param {Function} handler - Callback com ID do prêmio e botão acionado.
+   * @returns {void}
+   */
   onRedeem(handler) {
     this.rewardsGrid?.addEventListener("click", (event) => {
       const button = event.target.closest("[data-reward-id]");
@@ -34,16 +56,32 @@ export class RewardsUI {
     });
   }
 
+  /**
+   * Atualiza o estado do botão de logout.
+   * @param {boolean} isLoading - Indica se o logout está em andamento.
+   * @returns {void}
+   */
   setLogoutLoading(isLoading) {
     if (this.logoutButton) this.logoutButton.disabled = isLoading;
   }
 
+  /**
+   * Atualiza o estado do botão de resgate.
+   * @param {HTMLButtonElement} button - Botão do prêmio.
+   * @param {boolean} isLoading - Indica se o resgate está em andamento.
+   * @returns {void}
+   */
   setRedeemLoading(button, isLoading) {
     if (!button) return;
     button.disabled = isLoading;
     button.textContent = isLoading ? "Resgatando..." : "Resgatar prêmio";
   }
 
+  /**
+   * Atualiza os dados do jogador e o saldo exibido.
+   * @param {Object} profile - Dados atuais do perfil.
+   * @returns {void}
+   */
   updateProfile(profile) {
     const level = Math.floor(profile.xp / 100) + 1;
     const initials = profile.name
@@ -59,11 +97,23 @@ export class RewardsUI {
     this.balance.textContent = `${Number(profile.coins || 0)} Gold`;
   }
 
+  /**
+   * Exibe uma mensagem de estado da loja.
+   * @param {string} message - Mensagem a exibir.
+   * @param {boolean} [isError=false] - Indica se a mensagem representa erro.
+   * @returns {void}
+   */
   showMessage(message, isError = false) {
     this.message.textContent = message;
     this.message.classList.toggle("rewards-message--error", isError);
   }
 
+  /**
+   * Renderiza os prêmios e atualiza o saldo disponível.
+   * @param {Array<Object>} rewards - Prêmios disponíveis.
+   * @param {number} balance - Saldo atual em Gold.
+   * @returns {void}
+   */
   renderRewards(rewards, balance) {
     this.balance.textContent = `${Number(balance || 0)} Gold`;
     if (!rewards.length) {
@@ -91,6 +141,12 @@ export class RewardsUI {
     }).join("");
   }
 
+  /**
+   * Renderiza o histórico de resgates do jogador.
+   * @param {Array<Object>} redemptions - Resgates do jogador.
+   * @param {Map<string, string>} rewardsById - Títulos dos prêmios indexados por ID.
+   * @returns {void}
+   */
   renderRedemptions(redemptions, rewardsById) {
     if (!redemptions.length) {
       this.redemptionsList.innerHTML = `<p class="rewards-message">Seus resgates aparecerão aqui.</p>`;

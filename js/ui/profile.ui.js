@@ -1,10 +1,4 @@
-/**
- * Módulo de Interface para Seleção de Perfis (BrotherQuest)
- *
- * @author Victor Pedroza <victor242206@protonmail.com>
- * @since 2026-08-04
- * @version 1.0.0
- */
+/** Interface de seleção e acesso aos perfis de jogador. */
 
 const ICONS = {
   flame: `
@@ -20,7 +14,12 @@ const ICONS = {
   `,
 };
 
+/** Interface de seleção e acesso aos perfis de jogador. */
 export class ProfileUI {
+  /**
+   * Inicializa a interface de perfis.
+   * @param {string} [containerId="cardsContainer"] - ID do contêiner dos perfis.
+   */
   constructor(containerId = "cardsContainer") {
     this.container = document.getElementById(containerId);
     this.passwordPanel = document.getElementById("profilePasswordPanel");
@@ -33,6 +32,10 @@ export class ProfileUI {
     this.bindPasswordPanel();
   }
 
+  /**
+   * Registra os eventos do formulário de senha e seus controles.
+   * @returns {void}
+   */
   bindPasswordPanel() {
     if (!this.passwordForm) return;
 
@@ -54,6 +57,12 @@ export class ProfileUI {
     document.getElementById("changeProfile")?.addEventListener("click", () => this.clearSelectedProfile());
   }
 
+  /**
+   * Marca um perfil como selecionado e exibe o formulário de senha.
+   * @param {Object} profile - Perfil selecionado.
+   * @param {HTMLElement} card - Elemento visual do perfil.
+   * @returns {void}
+   */
   selectProfile(profile, card) {
     this.container.querySelectorAll(".card").forEach((item) => item.classList.remove("selected"));
     card.classList.add("selected");
@@ -66,6 +75,10 @@ export class ProfileUI {
     this.passwordInput.focus();
   }
 
+  /**
+   * Limpa a seleção atual e oculta o formulário de senha.
+   * @returns {void}
+   */
   clearSelectedProfile() {
     this.container.querySelectorAll(".card").forEach((item) => item.classList.remove("selected"));
     this.selectedProfile = null;
@@ -74,9 +87,9 @@ export class ProfileUI {
   }
 
   /**
-   * Obtém as iniciais do nome do perfil.
-   * @param {string} name - O nome do perfil.
-   * @returns {string} As iniciais do nome.
+  * Obtém as iniciais do nome do perfil.
+  * @param {string} [name=""] - Nome do perfil.
+  * @returns {string} Iniciais do nome.
    */
   getInitials(name = "") {
     if (!name) return "??";
@@ -88,10 +101,10 @@ export class ProfileUI {
   }
 
   /**
-   * Cria o elemento HTML para um cartão de perfil.
-   * @param {Object} profile - Os dados do perfil.
-   * @param {Function} onSelect - A função a ser chamada ao selecionar o perfil.
-   * @returns {HTMLElement} O elemento HTML do cartão.
+  * Cria o elemento HTML para um cartão de perfil.
+  * @param {Object} profile - Dados do perfil.
+  * @param {Function} onSelect - Callback associado à seleção do perfil.
+  * @returns {HTMLElement} Elemento HTML do cartão.
    */
   createProfileCardElement(profile, onSelect) {
     const card = document.createElement("div");
@@ -128,6 +141,7 @@ export class ProfileUI {
 
   /**
    * Exibe uma mensagem de carregamento.
+    * @returns {void}
    */
   showLoading() {
     if (!this.container) return;
@@ -139,8 +153,9 @@ export class ProfileUI {
   }
 
   /**
-   * Exibe uma mensagem de erro.
-   * @param {string} message - A mensagem de erro.
+  * Exibe uma mensagem de erro.
+  * @param {string} [message="Erro ao carregar os perfis."] - Mensagem de erro.
+  * @returns {void}
    */
   showError(message = "Erro ao carregar os perfis.") {
     if (!this.container) return;
@@ -153,9 +168,10 @@ export class ProfileUI {
 
   /**
    * Renderiza os perfis na interface.
-   * @param {Array} profiles - A lista de perfis a serem renderizados.
-   * @param {Object} options - As opções para o renderizador.
-   * @param {Function} options.onSelectProfile - A função a ser chamada ao selecionar um perfil.
+  * @param {Array<Object>} [profiles=[]] - Perfis a renderizar.
+  * @param {Object} [options={}] - Opções de renderização.
+  * @param {Function} options.onSelectProfile - Callback executado ao selecionar um perfil.
+  * @returns {void}
    */
   renderProfiles(profiles = [], { onSelectProfile } = {}) {
     if (!this.container) return;

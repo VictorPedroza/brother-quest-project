@@ -9,6 +9,10 @@ let completedActivityIds = new Set();
 let profile = null;
 let currentUserId = null;
 
+/**
+ * Carrega a sessão, os dados do perfil e as atividades do painel.
+ * @returns {Promise<void>}
+ */
 async function loadDashboard() {
   let user;
 
@@ -51,6 +55,13 @@ async function loadDashboard() {
   }
 }
 
+/**
+ * Registra a conclusão de uma atividade e atualiza o painel.
+ * @param {string} activityId - Identificador da atividade.
+ * @param {HTMLButtonElement} button - Botão associado à atividade.
+ * @param {File} photo - Foto enviada como evidência.
+ * @returns {Promise<void>}
+ */
 async function completeActivity(activityId, button, photo) {
   ui.setActivityLoading(button, true);
 
@@ -72,6 +83,10 @@ async function completeActivity(activityId, button, photo) {
   }
 }
 
+/**
+ * Encerra a sessão e retorna à tela inicial.
+ * @returns {Promise<void>}
+ */
 async function logout() {
   ui.setLogoutLoading(true);
 

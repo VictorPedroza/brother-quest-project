@@ -1,23 +1,12 @@
 import { supabase } from '../supabase/supabaseClient.js';
 
-/**
- * Serviço responsável pela autenticação dos usuários
- * 
- * @author Victor Pedroza <victor.pedroza@protonmail.com>
- * @since 2026-08-10
- * @version 1.0.0 
- * 
- * @class AuthService
- * @static
- **/
+/** Operações de autenticação e autorização de usuários. */
 export class AuthService {
-
   /**
-   * Realiza o login de um usuário
-   * 
-   * @param {string} email - O email do usuário
-   * @param {string} password - A senha do usuário
-   * @returns {Promise<Object>} Os dados do usuário e sessão autenticada
+    * Autentica um usuário com e-mail e senha.
+    * @param {string} email - E-mail da conta.
+    * @param {string} password - Senha da conta.
+    * @returns {Promise<Object>} Dados do usuário e da sessão.
    */
   static async login(email, password) {
     const { data, error } = await supabase.auth.signInWithPassword({ 
@@ -32,6 +21,11 @@ export class AuthService {
     return data;
   }
 
+  /**
+   * Retorna o usuário da sessão atual.
+   * @returns {Promise<Object>} Usuário autenticado.
+   * @throws {Error} Se não houver uma sessão válida.
+   */
   static async getCurrentUser() {
     const { data, error } = await supabase.auth.getUser();
 
@@ -41,10 +35,20 @@ export class AuthService {
     return data.user;
   }
 
+  /**
+   * Verifica se os metadados do usuário declaram o papel de administrador.
+   * @param {Object} user - Usuário autenticado.
+   * @returns {boolean} `true` quando o papel é de administrador.
+   */
   static isAdmin(user) {
     return user?.app_metadata?.role === "admin" || user?.user_metadata?.role === "admin";
   }
 
+  /**
+   * Retorna o usuário atual somente se tiver permissão administrativa.
+   * @returns {Promise<Object>} Usuário administrador autenticado.
+   * @throws {Error} Se o usuário não tiver permissão administrativa.
+   */
   static async getCurrentAdmin() {
     const user = await this.getCurrentUser();
 

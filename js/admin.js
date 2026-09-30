@@ -13,6 +13,11 @@ const refreshButton = document.querySelector("#refreshPlayers");
 const refreshRedemptionsButton = document.querySelector("#refreshRedemptions");
 const redemptionsTableBody = document.querySelector("#redemptionsTableBody");
 
+/**
+ * Escapa texto para inserção segura em conteúdo HTML.
+ * @param {*} value - Valor a ser escapado.
+ * @returns {string} Texto escapado.
+ */
 function escapeHtml(value) {
   return String(value ?? "")
     .replaceAll("&", "&amp;")
@@ -22,10 +27,20 @@ function escapeHtml(value) {
     .replaceAll("'", "&#039;");
 }
 
+/**
+ * Gera até duas iniciais a partir de um nome.
+ * @param {string} name - Nome completo.
+ * @returns {string} Iniciais em maiúsculas.
+ */
 function initials(name) {
   return name.trim().split(/\s+/).map((part) => part[0]).slice(0, 2).join("").toUpperCase();
 }
 
+/**
+ * Renderiza os indicadores e as linhas da tabela de jogadores.
+ * @param {Array<Object>} players - Jogadores a exibir.
+ * @returns {void}
+ */
 function renderPlayers(players) {
   const totalXp = players.reduce((sum, player) => sum + player.xp, 0);
   const maxLevel = players.reduce((max, player) => Math.max(max, player.level), 0);
@@ -48,6 +63,10 @@ function renderPlayers(players) {
     </tr>`).join("");
 }
 
+/**
+ * Busca jogadores e atualiza o estado da tabela.
+ * @returns {Promise<void>}
+ */
 async function loadPlayers() {
   refreshButton.disabled = true;
   tableBody.innerHTML = '<tr><td colspan="5">Atualizando jogadores...</td></tr>';
@@ -62,10 +81,20 @@ async function loadPlayers() {
   }
 }
 
+/**
+ * Normaliza relações do Supabase que podem vir como objeto ou array.
+ * @param {*} value - Valor relacionado retornado pelo Supabase.
+ * @returns {*} Primeiro registro da relação ou o próprio valor.
+ */
 function relatedValue(value) {
   return Array.isArray(value) ? value[0] : value;
 }
 
+/**
+ * Formata uma data para exibição no painel.
+ * @param {string|Date} value - Data a formatar.
+ * @returns {string} Data e hora localizadas em pt-BR.
+ */
 function formatDate(value) {
   return new Intl.DateTimeFormat("pt-BR", {
     dateStyle: "short",
@@ -73,11 +102,21 @@ function formatDate(value) {
   }).format(new Date(value));
 }
 
+/**
+ * Converte o estado interno do resgate em um rótulo localizado.
+ * @param {string} status - Estado interno do resgate.
+ * @returns {string} Rótulo para exibição.
+ */
 function formatStatus(status) {
   const labels = { pending: "Pendente", approved: "Aprovado", rejected: "Recusado" };
   return labels[status] || status || "Pendente";
 }
 
+/**
+ * Renderiza os resgates registrados na tabela administrativa.
+ * @param {Array<Object>} redemptions - Resgates a exibir.
+ * @returns {void}
+ */
 function renderRedemptions(redemptions) {
   redemptionsCount.textContent = redemptions.length;
 
@@ -103,6 +142,10 @@ function renderRedemptions(redemptions) {
   }).join("");
 }
 
+/**
+ * Busca resgates e atualiza o estado da tabela.
+ * @returns {Promise<void>}
+ */
 async function loadRedemptions() {
   refreshRedemptionsButton.disabled = true;
   redemptionsTableBody.innerHTML = '<tr><td colspan="6">Atualizando resgates...</td></tr>';
@@ -117,6 +160,10 @@ async function loadRedemptions() {
   }
 }
 
+/**
+ * Valida a sessão administrativa e carrega os dados do painel.
+ * @returns {Promise<void>}
+ */
 async function init() {
   try {
     const user = await AuthService.getCurrentAdmin();

@@ -10,6 +10,11 @@ const overlayGreeting = document.getElementById("overlayGreeting");
 const overlayAvatar = document.getElementById("overlayAvatar");
 const overlayCloseBtn = document.getElementById("overlayClose");
 
+/**
+ * Exibe a saudação do jogador no overlay de boas-vindas.
+ * @param {{name: string}} player - Perfil autenticado.
+ * @returns {void}
+ */
 function showWelcomeOverlay(player) {
   if (!welcomeOverlay) return;
 
@@ -25,6 +30,10 @@ function showWelcomeOverlay(player) {
   welcomeOverlay.style.display = "flex";
 }
 
+/**
+ * Oculta o overlay de boas-vindas.
+ * @returns {void}
+ */
 function hideWelcomeOverlay() {
   if (!welcomeOverlay) return;
   welcomeOverlay.classList.remove("active");
@@ -32,7 +41,10 @@ function hideWelcomeOverlay() {
 }
 
 /**
- * Handler do Login executado quando o usuário digita a senha na UI
+ * Autentica o jogador e inicia a transição para o painel.
+ * @param {{name: string, email: string}} player - Perfil selecionado.
+ * @param {string} password - Senha informada pelo jogador.
+ * @returns {Promise<void>}
  */
 async function handleLogin(player, password) {
   if (!player || !player.email) {
@@ -72,6 +84,10 @@ async function handleLogin(player, password) {
     }
   }
 }
+/**
+ * Carrega os perfis e conecta as ações da tela inicial.
+ * @returns {Promise<void>}
+ */
 async function init() {
   ui.showLoading();
 

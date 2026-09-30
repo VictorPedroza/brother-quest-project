@@ -1,19 +1,11 @@
 import { supabase } from "../supabase/supabaseClient.js";
 
-/**
- * Serviço responsável lidar com atividades.
- *
- * @author Victor Pedroza <victor.pedroza@protonmail.com>
- * @since 2026-09-04
- * @version 1.0.0
- *
- * @class ActivityService
- * @static
- * @description Este serviço fornece métodos relacionados a atividades.
- *
- */
+/** Operações de leitura e conclusão de atividades. */
 export class ActivityService {
-  // Busca atividades no banco de dados
+  /**
+   * Busca as atividades disponíveis em ordem de criação.
+   * @returns {Promise<Array<Object>>} Atividades cadastradas.
+   */
   static async getActivities() {
     const { data, error } = await supabase
       .from("activities")
@@ -24,7 +16,10 @@ export class ActivityService {
     return data || [];
   }
 
-  // Busca atividades completas do usuário
+  /**
+   * Busca as conclusões registradas desde o início da semana atual.
+   * @returns {Promise<Array<Object>>} Conclusões do usuário atual.
+   */
   static async getCurrentCompletions() {
     const now = new Date();
     const daysSinceMonday = (now.getUTCDay() + 6) % 7;
@@ -40,7 +35,14 @@ export class ActivityService {
     return data || [];
   }
 
-  // Envia a evidência antes de registrar a conclusão da atividade.
+  /**
+   * Envia a foto de evidência e registra a conclusão da atividade.
+   * @param {string} activityId - Identificador da atividade.
+   * @param {string} userId - Identificador do usuário autenticado.
+   * @param {File} photo - Foto enviada como evidência.
+   * @returns {Promise<Object>} Resultado da conclusão retornado pelo Supabase.
+   * @throws {Error} Se a evidência não for uma imagem ou a operação falhar.
+   */
   static async completeActivity(activityId, userId, photo) {
     if (!photo?.type?.startsWith("image/")) {
       throw new Error("Envie uma foto para concluir a atividade.");

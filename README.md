@@ -140,6 +140,8 @@ Responsabilidades principais:
 - Usar um módulo de entrada em `js/` por página e manter lógica reutilizável em `service/`, `ui/` ou `utils/` conforme a responsabilidade.
 - Usar `<script type="module">` para os módulos de página e caminhos absolutos iniciados em `/` para os assets, como nas páginas atuais.
 - Preservar os nomes e caminhos públicos das páginas para manter compatibilidade com os links e o hosting estático.
+- Escrever JSDoc em português para classes, funções e métodos públicos; descrever cada parâmetro e retorno útil, inclusive `void` e `Promise<void>`, e registrar `@throws` quando o erro fizer parte do contrato.
+- Usar tipos JSDoc explícitos, indicar parâmetros opcionais com colchetes e evitar metadados de autor/versão que não descrevem o comportamento da API.
 
 ---
 

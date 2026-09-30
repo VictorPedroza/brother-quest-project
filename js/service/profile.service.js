@@ -1,18 +1,12 @@
 import { supabase } from '../supabase/supabaseClient.js';
 
-/**
- * Serviço responsável por buscar dados públicos dos perfis.
- * 
- * @author Victor Pedroza <victor.pedroza@protonmail.com>
- * @since 2026-08-04
- * @version 1.0.0
- * 
- * @class ProfileService
- * @static
- * @description Este serviço fornece métodos para buscar perfis públicos de jogadores.
- * 
- */
+/** Operações de consulta a perfis de jogadores. */
 export class ProfileService {
+  /**
+   * Busca os dados do perfil associado ao usuário.
+   * @param {string} userId - Identificador do usuário autenticado.
+   * @returns {Promise<Object>} Dados do perfil.
+   */
   static async getCurrentProfile(userId) {
     const { data, error } = await supabase
       .from('profiles')
@@ -25,8 +19,8 @@ export class ProfileService {
   }
 
   /**
-   * Busca os perfis do tipo 'player' chamando a RPC pública (não exige login).
-   * @returns {Promise<Array<Object>>} Lista de perfis formatados para a UI
+   * Busca e formata os perfis públicos de jogadores.
+   * @returns {Promise<Array<Object>>} Perfis prontos para a interface.
    */
   static async getPlayerProfiles() {
     try {
